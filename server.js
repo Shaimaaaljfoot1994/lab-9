@@ -74,14 +74,14 @@ function yelpHandler(request, response) {
 
 function sendJson(data, Response){
   Response.status(200).json(data);
-}
+};
 // ////// error 
 function notFoundHandler (request,response){
   response.status(404).send('?????????');
 };
 function errorHandler(error, req, Response) {
     Response.status(500).send(error);
-  }
+  };
 
 // ///// listen to app 
 client.connect()

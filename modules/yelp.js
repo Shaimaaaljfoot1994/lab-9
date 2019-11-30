@@ -1,13 +1,16 @@
 'use strict';
+
 const superagent = require('superagent');
+
 module.exports = getYelp;
 
 function getYelp(location) {
     const url = `https://api.yelp.com/v3/businesses/search?location=${location}`;
     return superagent.get(url)
-    .set('Authorization', `Bearer ${process.env.YELP_API_KEY}`) /////// this key are here for more security //
+    .set('Authorization', `Bearer ${process.env.YELP_API_KEY}`)      
     .then( data => parseYelpData(data.body) );
-}
+}; 
+
 function parseYelpData(data){
     try {
         const yelpSummaries = data.businesses.map( business => {
@@ -17,7 +20,8 @@ function parseYelpData(data){
     } catch(e) {
         return Promise.reject(e);
     }
-}
+};
+
 function Yelp(business){
     this.tableName = 'yelps';
     this.name = business.name;
@@ -26,4 +30,4 @@ function Yelp(business){
     this.rating = business.rating;
     this.url = business.url;
     this.created_at = Data.now();
-}
+} 

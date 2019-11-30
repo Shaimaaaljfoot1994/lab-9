@@ -1,13 +1,15 @@
 'use strict';
-const superagent = reqiure ('superagent');
-module.exports = getMovies ;
 
+const superagent = reqiure ('superagent');
+
+module.exports = getMovies ;
 
 function getMovies(location){
 const url =`https://api.themoviedb.org/3/movie/550?api_key=${process.env.MOVIE_API_KEY}/${location}`;
 return superagent.get(url)
 .then (data => parseMoviesData(data.body));
-}
+};  
+
 function parseMoviesData(data) {
     try {
         const movies = data.results.map(movie =>{
@@ -17,7 +19,7 @@ function parseMoviesData(data) {
       }  catch(e){
           return Promise.reject(e) ;
     }
-}
+}; 
 function Movie(movie){
     this.tableName='movies';
     this.title =movie.title ;

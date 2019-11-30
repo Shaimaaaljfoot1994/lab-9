@@ -1,5 +1,7 @@
 'use strict';
+
 const superagent = require('superagent');
+
 module.exports = getEvents;
 
 function getEvents(location) {
@@ -7,7 +9,7 @@ function getEvents(location) {
     return superagent.get(url)
     .then( data => parseEventsData( JSON.parse(data.text) ))
     .catch(err => console.error(err) );
-}
+}; 
 function parseEventsData(data) {
     try {
         const events = data.events.event.map(eventData => {
@@ -18,7 +20,9 @@ function parseEventsData(data) {
     } catch(e) {
         return Promise.reject(e);
     }
-}
+}; 
+
+
 function Event(event) {
     this.link = event.url;
     this.name = event.title;
